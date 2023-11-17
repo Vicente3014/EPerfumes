@@ -25,10 +25,10 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    await App_DB_Initializer.SeedDefaultData(scope.ServiceProvider);
-}
+//using (var scope = app.Services.CreateScope())
+//{
+//    await App_DB_Initializer.SeedDefaultData(scope.ServiceProvider);
+//}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

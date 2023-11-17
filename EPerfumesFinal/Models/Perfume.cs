@@ -30,6 +30,9 @@ namespace EPerfumesFinal.Models
         [Display(Name = "Tipo de Perfume")]
         public PerfumeVersion PerfumeVersion { get; set; }
 
+        public List<OrderDetails> OrderDetails { get; set; }
+        public List<CartDetails> CartDetails { get; set; }
+
 
         //Marca
         public int? Marca_ID { get; set; }
