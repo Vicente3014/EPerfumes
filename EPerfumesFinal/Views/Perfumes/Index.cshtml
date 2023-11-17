@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Perfume>
+
+
+@{
+    ViewData["Title"] = "Índice de perfumes";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Perfume_Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Perfume_Pic_URL)</th>
+                    <th>@Html.DisplayNameFor(model => model.Tamanho)</th>
+                    <th>@Html.DisplayNameFor(model => model.PerfumeType)</th>
+                    <th>@Html.DisplayNameFor(model => model.Price)</th>
+                    <th>@Html.DisplayNameFor(model => model.PerfumeVersion)</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            <img class="rounded" src="@item.Perfume_Pic_URL" alt="@item.Perfume_Name" style="max-width: 160px">
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.Perfume_Name)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.Tamanho)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem=>item.PerfumeType)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem=>item.Price)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem=>item.PerfumeVersion)
+                        </td>
+                        <td class="align-middle">
+                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Perfume_ID"><i class="bi bi-pencil-square"></i>Edit</a>|
+                            <a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@item.Perfume_ID"><i class="fa-thin fa-magnifying-glass"></i>Details</a>|
+                            <a class="btn btn-danger"><i class="bi bi-trash"></i>Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<div style="position: fixed; right:25px; bottom:25px;" class="text-white">
+    <a asp-controller="Perfumes" asp-action="Create" class="btn btn-success"><i class="bi bi-plus-circle">Adicionar</i></a>
+</div>

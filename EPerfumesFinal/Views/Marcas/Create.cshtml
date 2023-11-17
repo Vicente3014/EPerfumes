@@ -1,0 +1,51 @@
+﻿@model Marca
+@{
+    ViewData["Title"] = "Adicionar nova Marca";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <hi>Adicionar nova marca</hi>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group text-center">
+                        <img class="rounded" style="max-width: 160px" id="Marca_Pic_URLPreview" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Marca_Pic_URL" class="control-label"></label>
+                        <input asp-for="Marca_Pic_URL" class="form-control" />
+                        <span asp-validation-for="Marca_Pic_URL" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Marca_Name" class="control-label"></label>
+                        <input asp-for="Marca_Name" class="form-control" />
+                        <span asp-validation-for="Marca_Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-outline-success float-right" />
+                        <a class="btn btnbtn-outline-secondary" asp-action="Index">Show all</a>
+                    </div>
+                </form>            
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+   <script>
+
+      $(document).ready(function(){
+            var output = document.getElementById('Marca_Pic_URLPreview');
+            output.src = $("#Marca_Pic_URL").val();
+      })    
+
+      $("#Marca_Pic_URL").on("change",function(){
+          var output = document.getElementById('Marca_Pic_URLPreview');
+          output.src = $(this).val();
+      })
+   </script>
+}

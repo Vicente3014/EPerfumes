@@ -1,0 +1,111 @@
+﻿@model Perfume
+@{
+    ViewData["Title"] = "Adicionar novo Perfume";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <hi>Adicionar novo Perfume</hi>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group text-center">
+                        <img class="rounded" style="max-width: 160px" id="Perfume_Pic_URLPreview" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Perfume_Pic_URL" class="control-label"></label>
+                        <input asp-for="Perfume_Pic_URL" class="form-control" />
+                        <span asp-validation-for="Perfume_Pic_URL" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Perfume_Name" class="control-label"></label>
+                        <input asp-for="Perfume_Name" class="form-control" />
+                        <span asp-validation-for="Perfume_Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PerfumeType" class="control-label">Perfume Type</label>
+                        <span asp-validation-for="PerfumeType" class="text-danger"></span>
+                        <select asp-for="PerfumeType" asp-items="Html.GetEnumSelectList<EPerfumesFinal.Data.Enums.PerfumeType>()">Perfume Type</select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PerfumeVersion" class="control-label">Perfume Version</label>                      
+                        <span asp-validation-for="PerfumeVersion" class="text-danger"></span>
+                        <select asp-for="PerfumeVersion" asp-items="Html.GetEnumSelectList<EPerfumesFinal.Data.Enums.PerfumeVersion>()">Perfume Version</select>
+                    </div>                  
+                    <div class="form-group">
+                        <label asp-for="Tamanho" class="control-label"></label>
+                        <input asp-for="Tamanho" class="control-label" type="range" id="Tamanho" name="tamanho" min="50" max="150" />    
+                        <span asp-validation-for="Tamanho" class="text-danger"></span>
+                        <span id="TamanhoValor"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Price" class="control-label"></label>
+                        <input asp-for="Price" class="control-label" type="range" id="Price" name="Price" min="0.0" max="1000" value="0" />                          
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                        <span id="PriceValue"></span>
+                        <output></output>
+                    </div>
+                    <div class="form-group">
+                        <select name="MarcaId">
+                            <option value="">Selecione uma marca</option>
+                            @foreach (var marca in Model.MarcaList)
+                            {
+                                <option value="@marca.Marca_ID">@marca.Marca_Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-outline-success float-right" />
+                        <a class="btn btnbtn-outline-secondary" asp-action="Index">Show all</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+            var output = document.getElementById('Perfume_Pic_URLPreview');
+            output.src = $("#Perfume_Pic_URL").val();
+        })
+
+        $("#Perfume_Pic_URL").on("change", function () {
+            var output = document.getElementById('Perfume_Pic_URLPreview');
+            output.src = $(this).val();
+        })
+    </script>
+
+    <script>
+        var tamanhoInput = document.getElementById("Tamanho");
+        var tamanhoValor = document.getElementById("TamanhoValor");
+
+        tamanhoInput.addEventListener("input", function () {
+            tamanhoValor.textContent = tamanhoInput.value;
+        });
+    </script>
+
+    <script>
+        var priceInput = document.getElementById("Price");
+        var priceValue = document.getElementById("PriceValue");
+
+        priceInput.addEventListener("input", function () {
+            var value = priceInput.value;
+            var formattedValue = formatPrice(value);
+            priceValue.textContent = formattedValue;
+        });
+
+        function formatPrice(value) {
+            var formattedValue = Number(value).toLocaleString("pt-PT", { style: "currency", currency: "EUR" });
+            return formattedValue;
+        }
+    </script>
+
+
+
+}
